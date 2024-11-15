@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-       return await response.json();
+        return await response.json();
     }
 
     async function createOrUpdateArray(id) {
@@ -26,13 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const foundObject = statistics.find(data => data.imageId === id)
         const foundId = foundObject ? foundObject.id : null;
 
-        if(!foundId){
+        if (!foundId) {
             await fetch(dbUrl, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({opened: 1, imageId: id}),
+                body: JSON.stringify({ opened: 1, imageId: id }),
             })
             return;
         }
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({opened: foundObject.opened + 1, imageId: id}),
+            body: JSON.stringify({ opened: foundObject.opened + 1, imageId: id }),
         })
     }
 
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const selectedPresent = generateRandomNumber()
             surpriseImage.src = './pictures/' + selectedPresent + '.jpg';
 
-            createOrUpdateArray(selectedPresent+1);
+            createOrUpdateArray(selectedPresent + 1);
 
             // Open the box
             present.classList.add("open");
