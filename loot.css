@@ -10,25 +10,27 @@ body {
 .container {
     display: flex;
     flex-direction: column;
+    height: 100%;
     align-items: center;
+    gap: 8px;
 }
 
 .image-container {
-    display: block;
-    height: 500px;
+    flex: 1 1 50%;
     width: 500px;
 }
 
 .present-container {
-    margin-top: 50px;
-    display: block;
-    height: 200px;
+    flex: 1 1 20%;
 }
 
 .button-container {
-    margin-top: 20px;
-    display: block;
-    height: 50px;
+    flex: 1 1 5%;
+}
+
+.statistics-container {
+    flex: 1 1 25%;
+    overflow-y: auto;  /* Allow vertical scrolling when content overflows */
 }
 
 .present {
@@ -99,6 +101,41 @@ body {
     display: block;
     visibility: visible;
     animation: fadeIn 1s ease-in-out;
+}
+
+.table-container {
+    overflow: hidden; /* Ensures smooth animation for expansion */
+    max-height: 0;
+    transition: max-height 0.5s ease-in-out; /* Expanding animation */
+}
+/* Scrollable content when table is expanded */
+.table-container.scrollable {
+    overflow: visible;
+    overflow-y: scroll; /* Enables vertical scrolling when content overflows */
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f4f4f4;
+}
+.button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.button:hover {
+    background-color: #0056b3;
 }
 
 @keyframes fadeIn {

@@ -1,10 +1,48 @@
 document.addEventListener("DOMContentLoaded", () => {
     const present = document.querySelector(".present");
     const retryButton = document.querySelector(".retry");
+    const toggleTableButton = document.querySelector(".toggle-table");
     const surpriseImage = document.querySelector(".surprise-image");
     let clickCount = 0;
     present.addEventListener("click", openPresent);
     retryButton.addEventListener("click", retry);
+    toggleTableButton.addEventListener("click", toggleTable);
+    createTable();
+
+    async function fetchStatistics() {
+        const response = await fetch(dbUrl);
+        if (!response.ok) {
+            console.error("Error fetching Data")
+            return;
+        }
+
+       return await response.json();
+    }
+
+    async function createOrUpdateArray(id) {
+        const statistics = await fetchStatistics()
+        const foundObject = statistics.find(data => data.imageId === id)
+        const foundId = foundObject ? foundObject.id : null;
+
+        if(!foundId){
+            await fetch(dbUrl, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({opened: 1, imageId: id}),
+            })
+            return;
+        }
+
+        await fetch(dbUrl + "/" + foundId, {
+            method: "PUT",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({opened: foundObject.opened + 1, imageId: id}),
+        })
+    }
 
     function openPresent() {
         if (clickCount < 10) {
@@ -44,9 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function createTable() {
-        const rowCount = parseInt(document.getElementById("rowCount").value, 10);
-        const tbody = document.getElementById("dynamicTable").querySelector("tbody");
+    async function createTable() {
+        const statistics = await fetchStatistics();
+        const tbody = document.querySelector(".statistics-table").querySelector("tbody");
         tbody.innerHTML = ""; // Clear previous rows
 
         for (let i = 1; i <= rowCount; i++) {
@@ -63,4 +101,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function toggleTable() {
+        const tableContainer = document.querySelector('.table-container');
+        const button = document.querySelector('.toggle-table');
+
+        if (tableContainer.style.maxHeight) {
+            // Collapse the table
+            tableContainer.style.maxHeight = null;
+            tableContainer.style.overflow = 'hidden';
+            button.textContent = '⬇ Statistik aller Benutzer';
+        } else {
+            // Expand the table
+            const tableHeight = tableContainer.scrollHeight; // Get natural height of content
+            tableContainer.style.maxHeight = tableHeight + 'px';
+            tableContainer.style.overflow = 'visible';
+            button.textContent = '⬆ Statistik einklappen';
+        }
+    }
 });

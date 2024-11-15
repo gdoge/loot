@@ -9,8 +9,9 @@
 </head>
 
 <body>
+<script src="loot.js"></script>
 <div class="container">
-    <h1 class="present-caption"></h1>
+<!--    <h1 class="present-caption"></h1>-->
 
     <div class="image-container">
         <img alt="Surprise!" class="surprise-image" src="./pictures/1.jpg"/>
@@ -26,12 +27,16 @@
     </div>
 
     <div class="button-container">
-        <button class="retry">I want to open a new present!</button>
+        <button class="button retry">I will ein weiteres Geschenk aufmachen!</button>
+    </div>
+
+    <div class="button-container">
+        <button class="button toggle-table">⬇ Zeige mir die Statistik von allen Benutzern</button>
     </div>
 
     <div class="statistics-container">
-        <div class="statistics">
-            <table id="dynamicTable">
+        <div class="table-container">
+            <table class="statistics-table">
                 <thead>
                 <tr>
                     <th>Geschenk</th>
@@ -44,6 +49,5 @@
         </div>
     </div>
 </div>
-<script src="loot.js"></script>
 </body>
 </html>
