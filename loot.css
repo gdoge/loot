@@ -1,0 +1,112 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-container {
+    display: block;
+    height: 500px;
+    width: 500px;
+}
+
+.present-container {
+    margin-top: 50px;
+    display: block;
+    height: 200px;
+}
+
+.button-container {
+    margin-top: 20px;
+    display: block;
+    height: 50px;
+}
+
+.present {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    cursor: pointer;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    background: #ff6f61;
+    border-radius: 5px;
+    position: absolute;
+}
+
+.lid {
+    width: 200px;
+    height: 30px;
+    background: #ff3e30;
+    position: absolute;
+    top: -30px;
+    border-radius: 5px 5px 0 0;
+    transition: transform 0.5s ease-out;
+}
+
+.ribbon-vertical,
+.ribbon-horizontal {
+    position: absolute;
+    background: #ffffff;
+}
+
+.ribbon-vertical {
+    width: 20px;
+    height: 200px;
+    left: 90px;
+}
+
+.ribbon-horizontal {
+    width: 200px;
+    height: 20px;
+    top: 90px;
+}
+
+.present.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(-5deg); }
+    75% { transform: rotate(3deg); }
+}
+
+.present.open .lid {
+    transform: translateX(-100px) rotate(-90deg) translateY(-200px);
+}
+
+.surprise-image {
+    visibility: hidden;
+    width: 100%;
+    border-radius: 10px;
+}
+
+.surprise-image.show {
+    display: block;
+    visibility: visible;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
