@@ -1,6 +1,63 @@
 document.addEventListener("DOMContentLoaded", () => {
     const dbUrl = "https://67370f08aafa2ef2223279d5.mockapi.io/gifts";
 
+    const labels = [
+        "Socken",
+        "Teddybär",
+        "RAM 16GB",
+        "NVIDIA RTX 4080",
+        "Captain America Schild",
+        "Kiwi Plüschtier",
+        "Portal Gun Orange",
+        "Pokémon Rote Edition",
+        "RAM 32GB",
+        "Krokodil Plüschtier",
+        "Vampir-Oktopus Plüschtier",
+        "Stoffpuppe",
+        "Cooles Captain America Schild",
+        "Todesstern",
+        "Tux Plüschtier",
+        "PSX",
+        "NVIDIA RTX 4090",
+        "Fluffiges Kiwi Plüschtier",
+        "Ninja-Waffen",
+        "Bessere PSX",
+        "Warme Socken",
+        "Süßes Krokodil Plüschtier",
+        "Süßes Kiwi Plüschtier",
+        "Fluffiger Teddybär",
+        "Tux Plüschtier mit großen Füßen",
+        "Game Boy",
+        "Schicke Socken",
+        "Ninja-Stern",
+        "Lokomotive",
+        "Lokomotive mit Anhänger",
+        "Teddybär mit Todesstern",
+        "RAM 64GB",
+        "Ratte Plüschtier",
+        "Portal Gun Blau",
+        "Teddybär mit Geschenk",
+        "Seltener Teddybär",
+        "ALF Game Boy Spiel",
+        "Seltener Kiwi",
+        "Holz-Lokomotive",
+        "Weihnachtliche Stoffpuppe",
+        "Fuchs Plüschtier",
+        "Common Mystery Box",
+        "Rare Mystery Box",
+        "Epic Mystery Box",
+        "PSX mit Controller",
+        "Ratte",
+        "Süßes Weihnachtliches Krokodil Plüschtier",
+        "Elegante Socken",
+        "Legendary Mystery Box",
+        "Blau und Orange Portal Gun",
+        "Seltenes Vampir-Oktopus Plüschtier",
+        "Scrimblo",
+        "Echter Todesstern",
+        "Fluffige Ratte",
+    ]
+
     const present = document.querySelector(".present");
     const retryButton = document.querySelector(".retry");
     const toggleTableButton = document.querySelector(".toggle-table");
@@ -34,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 },
                 body: JSON.stringify({ opened: 1, imageId: id }),
             })
+            createTable()
             return;
         }
 
@@ -44,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             body: JSON.stringify({ opened: foundObject.opened + 1, imageId: id }),
         })
+        createTable();
     }
 
     function openPresent() {
@@ -98,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const cell1 = document.createElement("td");
             const cell2 = document.createElement("td");
 
-            cell1.textContent = `ImageID: ${statistic.imageId}`;
+            cell1.textContent = labels[statistic.imageId-1];
             cell2.textContent = statistic.opened;
 
             row.appendChild(cell1);
