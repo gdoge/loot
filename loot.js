@@ -1,4 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const dbUrl = "https://67370f08aafa2ef2223279d5.mockapi.io/gifts";
+
     const present = document.querySelector(".present");
     const retryButton = document.querySelector(".retry");
     const toggleTableButton = document.querySelector(".toggle-table");
@@ -52,8 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
             clickCount++;
         }
 
-        if (clickCount === 10) {
-            surpriseImage.src = './pictures/' + generateRandomNumber() + '.jpg';
+        if (clickCount === 1) {
+            const selectedPresent = generateRandomNumber()
+            surpriseImage.src = './pictures/' + selectedPresent + '.jpg';
+
+            createOrUpdateArray(selectedPresent+1);
+
             // Open the box
             present.classList.add("open");
             // Show the surprise image
@@ -87,13 +93,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const tbody = document.querySelector(".statistics-table").querySelector("tbody");
         tbody.innerHTML = ""; // Clear previous rows
 
-        for (let i = 1; i <= rowCount; i++) {
+        for (const statistic of statistics) {
             const row = document.createElement("tr");
             const cell1 = document.createElement("td");
             const cell2 = document.createElement("td");
 
-            cell1.textContent = `Row ${i} Col 1`;
-            cell2.textContent = `Row ${i} Col 2`;
+            cell1.textContent = `ImageID: ${statistic.imageId}`;
+            cell2.textContent = statistic.opened;
 
             row.appendChild(cell1);
             row.appendChild(cell2);
