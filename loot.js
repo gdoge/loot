@@ -121,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const retryButton = document.querySelector(".retry");
     const toggleTableButton = document.querySelector(".toggle-table");
     const surpriseImage = document.querySelector(".surprise-image");
+    const presentCaption = document.querySelector(".present-caption");
     let clickCount = 0;
     let clickAmount = 10;
     present.addEventListener("click", openPresent);
@@ -185,6 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Show the surprise image
             setTimeout(() => {
                 surpriseImage.classList.add("show");
+                presentCaption.textContent = labels[selectedPresent]
             }, 500);
         }
     }
@@ -194,6 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
         clickAmount = (clickAmount  - 1) === 0 ? 1 : clickAmount  - 1;
         present.classList.remove("open");
         surpriseImage.classList.remove("show");
+        presentCaption.textContent = ''
     }
 
     function generateRandomNumber() {
@@ -237,6 +240,10 @@ document.addEventListener("DOMContentLoaded", () => {
             row.appendChild(cell3);
             tbody.appendChild(row);
         }
+        // window.scrollTo({
+        //     top: document.body.scrollHeight,
+        //     behavior: 'smooth' // For smooth scrolling
+        // });
     }
 
     function toggleTable() {
@@ -247,7 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Collapse the table
             tableContainer.style.maxHeight = null;
             tableContainer.style.overflow = 'hidden';
-            button.textContent = '⬇ Statistik aller Benutzer';
+            button.textContent = '⬇ Zeige mir die Statistik von allen Benutzern';
         } else {
             // Expand the table
             const tableHeight = tableContainer.scrollHeight; // Get natural height of content
